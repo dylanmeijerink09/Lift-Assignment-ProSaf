@@ -1,13 +1,169 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{691ad225-5b7f-4f82-b1a8-a7e9bbc42919}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{691ad225-5b7f-4f82-b1a8-a7e9bbc42919}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	floorOneLamp : BOOL := FALSE;
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[
+CheckIfAtFloor();
+
+CASE GVL.caseInput OF
+	0:
+		// Init lift values
+		GVL.currentFloor := 0;
+		GVL.targetFloor := 0;
+		GVL.liftMoving := FALSE;
+		GVL.openDoor := FALSE;
+		
+		// Set lift to operating mode
+		GVL.caseInput := 1;
+
+	1:
+		// Wait for outside user input
+		IF GVL.callLevel0 THEN
+			GVL.targetFloor := 0;
+			GVL.ledLevel0 := TRUE;
+			// Set the case input
+			GVL.caseInput := 2;
+		ELSIF GVL.callLevel1 THEN
+			GVL.targetFloor := 1;
+			GVL.ledLevel1 := TRUE;
+			// Set the case input
+			GVL.caseInput := 2;
+		ELSIF GVL.callLevel2 THEN
+			GVL.targetFloor := 2;
+			GVL.ledLevel2 := TRUE;
+			// Set the case input
+			GVL.caseInput := 2;
+		END_IF
+			
+	2:
+		// Check if at target floor
+		IF GVL.targetFloor = GVL.currentFloor THEN
+			// Stop lift movements
+			GVL.liftMoving := FALSE;
+			
+			// Turn off ledLevels
+			GVL.ledLevel0 := FALSE;
+			GVL.ledLevel1 := FALSE;
+			GVL.ledLevel2 := FALSE;
+			
+			// Open the door
+			GVL.openDoor := TRUE;
+			
+			// Set case to 5 and wait for user input
+			GVL.caseInput := 5;
+			
+		ELSIF GVL.targetFloor < GVL.currentFloor THEN
+			GVL.caseInput := 3;
+		ELSIF GVL.targetFloor > GVL.currentFloor THEN
+			GVL.caseInput := 4;
+		END_IF
+		
+	3:
+		// Move lift upwards
+		GVL.liftDirection := TRUE;
+		GVL.liftMoving := TRUE;
+		
+		// SInulate lift timer
+		GVL.simulationTime(IN := TRUE, PT := GVL.simulationPace);
+		
+		// Increase lift level by 1
+		GVL.currentFloor := GVL.currentFloor + 1;
+		
+		// Check if this is the correct floor
+		GVL.caseInput := 2;
+		
+	4: // Move lift downwards
+		GVL.liftDirection := FALSE;
+		GVL.liftMoving := TRUE;
+		
+		// SInulate lift timer
+		GVL.simulationTime(IN := TRUE, PT := GVL.simulationPace);
+		
+		// Decrease lift level by 1
+		GVL.currentFloor := GVL.currentFloor - 1;
+		
+		// Check if this is the correct floor
+		GVL.caseInput := 2;
+		
+	5:
+		// Wait for user input inside lift to move
+		IF GVL.setTargetLevel0 THEN
+			GVL.targetFloor := 0;
+			GVL.caseInput := 2;
+		ELSIF GVL.setTargetLevel1 THEN
+			GVL.targetFloor := 1;
+			GVL.caseInput := 2;
+		ELSIF GVL.setTargetLevel2 THEN
+			GVL.targetFloor := 2;
+			GVL.caseInput := 2;
+		END_IF
+		
+END_CASE
+
+]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="54" Count="1" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="227" Count="1" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="367" Count="1" />
+      <LineId Id="226" Count="0" />
+      <LineId Id="262" Count="1" />
+      <LineId Id="365" Count="1" />
+      <LineId Id="268" Count="0" />
+      <LineId Id="270" Count="1" />
+      <LineId Id="363" Count="1" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="273" Count="0" />
+      <LineId Id="133" Count="2" />
+      <LineId Id="275" Count="0" />
+      <LineId Id="277" Count="0" />
+      <LineId Id="301" Count="2" />
+      <LineId Id="305" Count="4" />
+      <LineId Id="278" Count="6" />
+      <LineId Id="312" Count="1" />
+      <LineId Id="311" Count="0" />
+      <LineId Id="310" Count="0" />
+      <LineId Id="316" Count="2" />
+      <LineId Id="321" Count="1" />
+      <LineId Id="330" Count="0" />
+      <LineId Id="329" Count="0" />
+      <LineId Id="328" Count="0" />
+      <LineId Id="326" Count="0" />
+      <LineId Id="325" Count="0" />
+      <LineId Id="324" Count="0" />
+      <LineId Id="327" Count="0" />
+      <LineId Id="323" Count="0" />
+      <LineId Id="319" Count="1" />
+      <LineId Id="332" Count="9" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="342" Count="2" />
+      <LineId Id="346" Count="1" />
+      <LineId Id="353" Count="5" />
+      <LineId Id="350" Count="0" />
+      <LineId Id="348" Count="0" />
+      <LineId Id="345" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="48" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Task Name="PlcTask_1" Id="{bbdad61b-9d7d-4065-86e9-7d78249b736a}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>20</Priority>
+    <PouCall>
+      <Name>Floor2</Name>
+    </PouCall>
+    <TaskFBGuid>{bc05ffbe-92ee-40cc-a4f6-965a526978ed}</TaskFBGuid>
+    <Fb_init>{69a00758-de5c-4f32-9796-7dff9e20ffe3}</Fb_init>
+    <Fb_exit>{8236a9be-63d9-4375-88d1-e79c83ce40aa}</Fb_exit>
+    <CycleUpdate>{7ad2a09b-f126-4fd5-a72f-0d701a7ea97f}</CycleUpdate>
+    <PostCycleUpdate>{8600ee5c-db5d-475e-9728-43aac19412c3}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>
