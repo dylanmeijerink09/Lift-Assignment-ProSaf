@@ -36,6 +36,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"94"</v>
+              <v n="TextDefault">"Current floor: %s"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"161"</v>
               <v n="TextDefault">"Door is open"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -88,6 +93,21 @@
             <o>
               <v n="TextID">"387"</v>
               <v n="TextDefault">"Ready to enter (door is open)"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"183"</v>
+              <v n="TextDefault">"Test"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"731"</v>
+              <v n="TextDefault">"Test %s"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"11"</v>
+              <v n="TextDefault">"Test GVL.currentFloor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>

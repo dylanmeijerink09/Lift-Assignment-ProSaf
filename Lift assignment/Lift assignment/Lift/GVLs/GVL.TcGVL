@@ -10,6 +10,7 @@ VAR_GLOBAL
 	liftMoving : BOOL := FALSE;		// Lift is moving
 	liftDirection : BOOL := FALSE;	// Lift moving direction (1 is up, 0 is down)
 	openDoor : BOOL := FALSE;		// True = open door, False = close door
+	liftOperation : BOOL := FALSE;	// True = inside lift, False = outside lift
 	
 	// Buttons
 	callLevel0 : BOOL := FALSE;		// Call base level
