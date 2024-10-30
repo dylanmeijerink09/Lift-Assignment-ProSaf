@@ -8,8 +8,6 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-CheckIfAtFloor();
-
 CASE GVL.caseInput OF
 	0:
 		// Init lift values
@@ -44,30 +42,70 @@ CASE GVL.caseInput OF
 		END_IF
 			
 	2:
-		// Check if at target floor
-		IF GVL.targetFloor = GVL.currentFloor THEN
-			// Stop lift movements
-			GVL.liftMoving := FALSE;
-			GVL.ledLiftMoving := FALSE;
+		// Check if lift current floor == target floor, else move lift to correct floor
+		IF CheckIfAtFloor() THEN
 			
-			// Turn off ledLevels
-			GVL.ledLevel0 := FALSE;
-			GVL.ledLevel1 := FALSE;
-			GVL.ledLevel2 := FALSE;
-			
-			// Open the door
-			GVL.openDoor := TRUE;
-			GVL.ledDoorsOpen := TRUE;
-			
-			
-			// Set case to 5 and wait for user input
-			GVL.caseInput := 5;
-			
-		ELSIF GVL.targetFloor < GVL.currentFloor THEN
-			GVL.caseInput := 3;
-		ELSIF GVL.targetFloor > GVL.currentFloor THEN
-			GVL.caseInput := 4;
+			// If floor was called from outside 
+			IF GVL.liftOperation = FALSE THEN
+//				GVL.caseInput := 3;
+				// Open doors
+				GVL.openDoor := TRUE;
+				GVL.ledDoorsOpen := TRUE;
+				
+				// Turn off buttom ledLevels
+				GVL.ledLevel0 := FALSE;
+				GVL.ledLevel1 := FALSE;
+				GVL.ledLevel2 := FALSE;
+				
+				// Wait for input inside lift
+				GVL.caseInput := 5;	
+				
+			// If floor was called from inside
+			ELSIF GVL.liftOperation = TRUE THEN
+				// Open doors
+				GVL.openDoor := TRUE;
+				GVL.ledDoorsOpen := TRUE;
+				
+				// SInulate lift door timer
+				GVL.simulationTime(IN := TRUE, PT := GVL.simulationPace);
+				
+				// SInulate lift door timer
+				IF GVL.simulationTime.Q THEN
+					GVL.simulationTime(IN := FALSE);
+					GVL.openDoor := FALSE;
+					GVL.ledDoorsOpen := FALSE;
+					
+					GVL.liftOperation := FALSE;
+					// Set case to 2 and wait for outside user input
+					GVL.caseInput := 1;			
+	
+				END_IF
+			END_IF
 		END_IF
+//		// Check if at target floor
+//		IF GVL.targetFloor = GVL.currentFloor THEN
+//			// Stop lift movements
+//			GVL.liftMoving := FALSE;
+//			GVL.ledLiftMoving := FALSE;
+			
+//			// Turn off ledLevels
+//			GVL.ledLevel0 := FALSE;
+//			GVL.ledLevel1 := FALSE;
+//			GVL.ledLevel2 := FALSE;
+			
+//			// Open the door
+//			GVL.openDoor := TRUE;
+//			GVL.ledDoorsOpen := TRUE;
+			
+			
+//			// Set case to 5 and wait for user input
+//			GVL.caseInput := 5;
+			
+//		ELSIF GVL.targetFloor < GVL.currentFloor THEN
+//			GVL.caseInput := 3;
+//		ELSIF GVL.targetFloor > GVL.currentFloor THEN
+//			GVL.caseInput := 4;
+//		END_IF
 		
 	3:
 		// Move lift upwards
@@ -84,13 +122,13 @@ CASE GVL.caseInput OF
 			// Increase lift level by 1
 			GVL.currentFloor := GVL.currentFloor - 1;
 			
-			// Check if this is the correct floor
-			IF GVL.liftOperation = TRUE THEN
-				GVL.caseInput := 6;	
-			ELSIF GVL.liftOperation = FALSE THEN
-				GVL.caseInput := 2;
-			END_IF
-//			GVL.caseInput := 2;
+//			// Check if this is the correct floor
+//			IF GVL.liftOperation = TRUE THEN
+//				GVL.caseInput := 6;	
+//			ELSIF GVL.liftOperation = FALSE THEN
+//				GVL.caseInput := 2;
+//			END_IF
+			GVL.caseInput := 2;
 		END_IF
 		
 	4: // Move lift downwards
@@ -109,12 +147,12 @@ CASE GVL.caseInput OF
 			GVL.currentFloor := GVL.currentFloor + 1;
 			
 			// Check if this is the correct floor
-			IF GVL.liftOperation = TRUE THEN
-				GVL.caseInput := 6;	
-			ELSIF GVL.liftOperation = FALSE THEN
-				GVL.caseInput := 2;
-			END_IF
-//			GVL.caseInput := 2;
+//			IF GVL.liftOperation = TRUE THEN
+//				GVL.caseInput := 6;	
+//			ELSIF GVL.liftOperation = FALSE THEN
+//				GVL.caseInput := 2;
+//			END_IF
+			GVL.caseInput := 2;
 		END_IF
 		
 	5:
@@ -124,66 +162,65 @@ CASE GVL.caseInput OF
 			GVL.openDoor := FALSE;
 			GVL.ledDoorsOpen := FALSE;
 			GVL.liftOperation := TRUE;
-			GVL.caseInput := 6;
+			GVL.caseInput := 2;
 		ELSIF GVL.setTargetLevel1 THEN
 			GVL.targetFloor := 1;
 			GVL.openDoor := FALSE;
 			GVL.ledDoorsOpen := FALSE;
 			GVL.liftOperation := TRUE;
-			GVL.caseInput := 6;
+			GVL.caseInput := 2;
 		ELSIF GVL.setTargetLevel2 THEN
 			GVL.targetFloor := 2;
 			GVL.openDoor := FALSE;
 			GVL.ledDoorsOpen := FALSE;
 			GVL.liftOperation := TRUE;
-			GVL.caseInput := 6;
+			GVL.caseInput := 2;
 		END_IF
 		
 	6:
 		// Check if at target floor
-		IF GVL.targetFloor = GVL.currentFloor THEN
-			// Stop lift movements
-			GVL.liftMoving := FALSE;
-			GVL.ledLiftMoving := FALSE;
+//		IF GVL.targetFloor = GVL.currentFloor THEN
+//			// Stop lift movements
+//			GVL.liftMoving := FALSE;
+//			GVL.ledLiftMoving := FALSE;
 			
-			// Turn off ledLevels
-			GVL.ledLevel0 := FALSE;
-			GVL.ledLevel1 := FALSE;
-			GVL.ledLevel2 := FALSE;
+//			// Turn off ledLevels
+//			GVL.ledLevel0 := FALSE;
+//			GVL.ledLevel1 := FALSE;
+//			GVL.ledLevel2 := FALSE;
 			
-			// Open the door
-			GVL.openDoor := TRUE;
-			GVL.ledDoorsOpen := TRUE;
+//			// Open the door
+//			GVL.openDoor := TRUE;
+//			GVL.ledDoorsOpen := TRUE;
 			
-			// SInulate lift timer
-			GVL.simulationTime(IN := TRUE, PT := GVL.simulationPace);
+//			// SInulate lift timer
+//			GVL.simulationTime(IN := TRUE, PT := GVL.simulationPace);
 			
-			// SInulate lift door timer
-			IF GVL.simulationTime.Q THEN
-				GVL.simulationTime(IN := FALSE);
-				GVL.openDoor := FALSE;
-				GVL.ledDoorsOpen := FALSE;
+//			// SInulate lift door timer
+//			IF GVL.simulationTime.Q THEN
+//				GVL.simulationTime(IN := FALSE);
+//				GVL.openDoor := FALSE;
+//				GVL.ledDoorsOpen := FALSE;
 				
-				GVL.liftOperation := FALSE;
-				// Set case to 2 and wait for outside user input
-				GVL.caseInput := 1;
-			END_IF
+//				GVL.liftOperation := FALSE;
+//				// Set case to 2 and wait for outside user input
+//				GVL.caseInput := 1;
+//			END_IF
 
 			
-		ELSIF GVL.targetFloor < GVL.currentFloor THEN
-			GVL.liftOperation := TRUE;
-			GVL.caseInput := 3;
-		ELSIF GVL.targetFloor > GVL.currentFloor THEN
-			GVL.liftOperation := TRUE;
-			GVL.caseInput := 4;
-		END_IF
+//		ELSIF GVL.targetFloor < GVL.currentFloor THEN
+//			GVL.liftOperation := TRUE;
+//			GVL.caseInput := 3;
+//		ELSIF GVL.targetFloor > GVL.currentFloor THEN
+//			GVL.liftOperation := TRUE;
+//			GVL.caseInput := 4;
+//		END_IF
 		
 END_CASE
 
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="54" Count="1" />
       <LineId Id="102" Count="0" />
       <LineId Id="78" Count="0" />
       <LineId Id="109" Count="0" />
@@ -212,7 +249,29 @@ END_CASE
       <LineId Id="373" Count="0" />
       <LineId Id="265" Count="0" />
       <LineId Id="273" Count="0" />
-      <LineId Id="133" Count="2" />
+      <LineId Id="133" Count="1" />
+      <LineId Id="535" Count="0" />
+      <LineId Id="512" Count="0" />
+      <LineId Id="514" Count="0" />
+      <LineId Id="536" Count="0" />
+      <LineId Id="515" Count="1" />
+      <LineId Id="539" Count="1" />
+      <LineId Id="544" Count="0" />
+      <LineId Id="543" Count="0" />
+      <LineId Id="548" Count="2" />
+      <LineId Id="547" Count="0" />
+      <LineId Id="546" Count="0" />
+      <LineId Id="541" Count="1" />
+      <LineId Id="537" Count="1" />
+      <LineId Id="518" Count="0" />
+      <LineId Id="551" Count="2" />
+      <LineId Id="522" Count="0" />
+      <LineId Id="545" Count="0" />
+      <LineId Id="523" Count="9" />
+      <LineId Id="520" Count="1" />
+      <LineId Id="517" Count="0" />
+      <LineId Id="533" Count="1" />
+      <LineId Id="135" Count="0" />
       <LineId Id="275" Count="0" />
       <LineId Id="277" Count="0" />
       <LineId Id="301" Count="0" />
