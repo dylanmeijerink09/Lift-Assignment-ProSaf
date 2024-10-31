@@ -27,13 +27,6 @@ VAR_GLOBAL
 	setTargetLevel0 : BOOL := FALSE;
 	setTargetLevel1 : BOOL := FALSE;
 	setTargetLevel2 : BOOL := FALSE;
-
-	// LEDs
-	ledLevel0 : BOOL := FALSE;	// Set target floor to base floor
-	ledLevel1 : BOOL := FALSE;	// Set target floor to first floor
-	ledLevel2 : BOOL := FALSE;	// Set target floor to seocnd floor
-	ledLiftMoving : BOOL := FALSE;
-	ledDoorsOpen : BOOL := FALSE;
 	
 	// Time variables
 	simulationTime : TON;			// Timer to simulate lift movement

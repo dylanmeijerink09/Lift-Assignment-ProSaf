@@ -13,7 +13,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{3CBF17CE-1F01-47F6-BFBE-404923BC43A2}" Name="Lift" PrjFilePath="Lift\Lift.plcproj" TmcFilePath="Lift\Lift.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Lift\Lift.tmc" TmcHash="{6AB2EA06-8879-0E25-293B-CEC54F7055C3}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Lift\Lift.tmc" TmcHash="{9929D03C-42B1-FB8D-C4D7-2BA90BEBBA4A}">
 					<Name>Lift Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

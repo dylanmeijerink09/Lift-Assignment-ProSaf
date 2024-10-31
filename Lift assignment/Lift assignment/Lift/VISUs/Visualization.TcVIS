@@ -266,7 +266,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"GVL.ledLevel0"</v>
+                      <v n="Value">"ledLogic.ledLevel0"</v>
                     </o>
                   </l>
                 </o>
@@ -360,7 +360,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"GVL.ledDoorsOpen"</v>
+                      <v n="Value">"ledLogic.ledDoorsOpen"</v>
                     </o>
                   </l>
                 </o>
@@ -793,7 +793,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"GVL.ledLevel1"</v>
+                      <v n="Value">"ledLogic.ledLevel1"</v>
                     </o>
                   </l>
                 </o>
@@ -887,7 +887,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"GVL.ledLevel2"</v>
+                      <v n="Value">"ledLogic.ledLevel2"</v>
                     </o>
                   </l>
                 </o>
@@ -1163,7 +1163,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"GVL.ledLiftMoving"</v>
+                      <v n="Value">"ledLogic.ledLiftMoving"</v>
                     </o>
                     <o>
                       <v n="Id">3438453433L</v>
