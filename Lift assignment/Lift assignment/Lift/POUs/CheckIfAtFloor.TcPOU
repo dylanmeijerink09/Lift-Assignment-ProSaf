@@ -17,7 +17,7 @@ END_VAR
 	
 	// Stop lift movements
 	GVL.liftMoving := FALSE;
-	GVL.ledLiftMoving := FALSE;
+//	GVL.ledLiftMoving := FALSE;
 	
 //	// Turn off ledLevels
 //	GVL.ledLevel0 := FALSE;

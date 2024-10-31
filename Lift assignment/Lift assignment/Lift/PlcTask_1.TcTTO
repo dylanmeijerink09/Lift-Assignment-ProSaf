@@ -5,7 +5,7 @@
     <CycleTime>10000</CycleTime>
     <Priority>20</Priority>
     <PouCall>
-      <Name>Floor2</Name>
+      <Name>ledLogic</Name>
     </PouCall>
     <TaskFBGuid>{bc05ffbe-92ee-40cc-a4f6-965a526978ed}</TaskFBGuid>
     <Fb_init>{69a00758-de5c-4f32-9796-7dff9e20ffe3}</Fb_init>

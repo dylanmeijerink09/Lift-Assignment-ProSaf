@@ -33,7 +33,7 @@
     <Compile Include="POUs\CheckIfAtFloor.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Floor2.TcPOU">
+    <Compile Include="POUs\ledLogic.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">

@@ -3,14 +3,22 @@
   <GVL Name="GVL" Id="{7b657eaf-3c50-4a66-b34e-94076662fc67}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	caseInput : INT := 0;	
+	// State cases
+	caseInput : INT := 0;
+	
+	// Instruction string
+	instructionString : STRING := 'Initializing lift';
 
+	// General variables
 	currentFloor : INT := 0;		// Holds the current floor
 	targetFloor : INT := 0;			// The target floor
 	liftMoving : BOOL := FALSE;		// Lift is moving
 	liftDirection : BOOL := FALSE;	// Lift moving direction (1 is up, 0 is down)
 	openDoor : BOOL := FALSE;		// True = open door, False = close door
 	liftOperation : BOOL := FALSE;	// True = inside lift, False = outside lift
+	
+	 // Independent Door Task Control
+    doorTask : BOOL := FALSE;         // Activate door task when lift reaches target floor
 	
 	// Buttons
 	callLevel0 : BOOL := FALSE;		// Call base level
@@ -26,10 +34,11 @@ VAR_GLOBAL
 	ledLevel2 : BOOL := FALSE;	// Set target floor to seocnd floor
 	ledLiftMoving : BOOL := FALSE;
 	ledDoorsOpen : BOOL := FALSE;
-	ledTEST : BOOL := TRUE;
 	
+	// Time variables
 	simulationTime : TON;			// Timer to simulate lift movement
 	simulationPace : TIME := T#3S;	// Simulate lift movement (3 seconds)
+    doorOpenPace : TIME := T#5S;      // Simulate door open duration (5 seconds)
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -46,6 +46,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"540"</v>
+              <v n="TextDefault">"Inside user input"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"512"</v>
+              <v n="TextDefault">"Instruction: %s"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"416"</v>
               <v n="TextDefault">"Lift arrived at floor 1"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -86,6 +96,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"427"</v>
+              <v n="TextDefault">"Outside lift call buttons"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"185"</v>
+              <v n="TextDefault">"Outside user input"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"417"</v>
               <v n="TextDefault">"Ready to enter"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -93,6 +113,11 @@
             <o>
               <v n="TextID">"387"</v>
               <v n="TextDefault">"Ready to enter (door is open)"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"475"</v>
+              <v n="TextDefault">"Select floor from inside the lift"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

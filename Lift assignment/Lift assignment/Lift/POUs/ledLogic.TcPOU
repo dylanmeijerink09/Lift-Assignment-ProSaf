@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="ledLogic" Id="{1b66c6d5-e132-4dd6-bb1d-63572541cf58}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM ledLogic
+VAR
+	floorTwoLamp : BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Turn of leds
+IF CheckIfAtFloor() THEN
+	IF GVL.liftOperation = FALSE THEN
+		// Turn off buttom ledLevels
+		GVL.ledLevel0 := FALSE;
+		GVL.ledLevel1 := FALSE;
+		GVL.ledLevel2 := FALSE;
+		GVL.ledDoorsOpen := TRUE;
+	END_IF
+END_IF
+
+// Turn on door LED
+IF GVL.callLevel0 THEN
+	GVL.ledLevel0 := TRUE;
+//ELSE GVL.ledLevel0 := FALSE;
+END_IF
+
+// Turn on door LED
+IF GVL.callLevel1 THEN
+	GVL.ledLevel1 := TRUE;
+//ELSE GVL.ledLevel1 := FALSE;
+END_IF
+
+// Turn on door LED
+IF GVL.callLevel2 THEN
+	GVL.ledLevel2 := TRUE;
+//ELSE GVL.ledLevel2 := FALSE;
+END_IF
+
+// Turn on door LED
+IF GVL.liftMoving THEN
+	GVL.ledLiftMoving := TRUE;
+ELSE 
+	GVL.ledLiftMoving := FALSE;
+END_IF
+
+// Turn on door LED
+IF GVL.openDoor THEN
+	GVL.ledDoorsOpen := TRUE;
+ELSE GVL.ledDoorsOpen := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="ledLogic">
+      <LineId Id="82" Count="0" />
+      <LineId Id="84" Count="1" />
+      <LineId Id="89" Count="2" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="53" Count="4" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="58" Count="4" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="63" Count="4" />
+      <LineId Id="74" Count="1" />
+      <LineId Id="68" Count="5" />
+      <LineId Id="48" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
